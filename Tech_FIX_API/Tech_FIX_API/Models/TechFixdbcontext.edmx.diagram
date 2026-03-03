@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="675d10e61c954db8a6e054b3d5349801" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="FixTechCompanyModel.Inventory" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FixTechCompanyModel.Order" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FixTechCompanyModel.Product" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FixTechCompanyModel.Quotation" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FixTechCompanyModel.Supplier" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="FixTechCompanyModel.FK__Inventori__Produ__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="FixTechCompanyModel.FK__Inventori__Suppl__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="FixTechCompanyModel.FK__Orders__Inventor__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="FixTechCompanyModel.FK__Orders__QuoteID__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="FixTechCompanyModel.FK__Orders__Supplier__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="FixTechCompanyModel.FK__Product__Supplie__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="FixTechCompanyModel.FK__Quotation__Suppl__4BAC3F29" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

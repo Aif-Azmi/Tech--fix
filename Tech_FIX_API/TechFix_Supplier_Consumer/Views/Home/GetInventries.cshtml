@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Tech_FIX_API.Models.Inventory>
+
+@{
+    ViewBag.Title = "GetInventries";
+}
+
+<h2>GetInventries</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.INserial_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.INserial_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InventoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InventoryValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StockQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.InventoryID })
+        </td>
+    </tr>
+}
+
+</table>

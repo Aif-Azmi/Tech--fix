@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Tech_FIX_API.Models.Supplier>
+
+@{
+    ViewBag.Title = "GetSuppliers";
+}
+
+<br />
+<h2 class="text-center">VIEW AVAILABLE SUPPLIERS</h2>
+
+<br />
+<br />
+<p>
+    @Html.ActionLink("Add New Supplier", "AddSupplier", null, new { @class = "btn btn-create" })
+</p>
+
+<br />
+<table class="table table-centered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.SupplierID)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.ContactInfo)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SupplierID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.ContactInfo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>
+                    @Html.ActionLink("Update", "UpdateSupplier", new { id = item.SupplierID }, new { @class = "btn btn-edit" }) |
+                    @Html.ActionLink("Delete", "DeleteSupplier", new { id = item.SupplierID }, new { @class = "btn btn-delete" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    /* Button Styles */
+    .btn-create {
+        background-color: blue;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .btn-edit {
+        background-color: green;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .btn-delete {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    /* Table Styles */
+    .table-centered th, .table-centered td {
+        text-align: center;
+    }
+
+    .table-centered th {
+        background-color: darkblue;
+        color: white;
+    }
+</style>
+
+<!-- Footer Section -->
+<footer style="background-color: black; color: white; text-align: center; padding: 10px;">
+    www.techfix.com
+</footer>

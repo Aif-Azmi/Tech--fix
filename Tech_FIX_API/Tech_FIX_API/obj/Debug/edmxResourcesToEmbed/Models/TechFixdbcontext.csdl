@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FixTechCompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="InventoryID" />
+    </Key>
+    <Property Name="InventoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="INserial_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="InventoryName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="InventoryValue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="StockQuantity" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Inventori__Produ__5165187F" FromRole="Inventories" ToRole="Product" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Inventori__Suppl__52593CB8" FromRole="Inventories" ToRole="Supplier" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Inventor__5629CD9C" FromRole="Inventories" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="QuoteID" Type="Int32" Nullable="false" />
+    <Property Name="InventoryID" Type="Int32" Nullable="false" />
+    <Property Name="INserial_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="InventoryName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="QuotationPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="StockQuantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Inventory" Relationship="Self.FK__Orders__Inventor__5629CD9C" FromRole="Orders" ToRole="Inventories" />
+    <NavigationProperty Name="Quotation" Relationship="Self.FK__Orders__QuoteID__5535A963" FromRole="Orders" ToRole="Quotations" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Orders__Supplier__571DF1D5" FromRole="Orders" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Serial_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Warranty_Period" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Inventories" Relationship="Self.FK__Inventori__Produ__5165187F" FromRole="Product" ToRole="Inventories" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Product__Supplie__4E88ABD4" FromRole="Product" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Quotation">
+    <Key>
+      <PropertyRef Name="QuoteID" />
+    </Key>
+    <Property Name="QuoteID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="QuotationPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="QuotaQuantity" Type="Int32" Nullable="false" />
+    <Property Name="OverAllDiscount" Type="Decimal" Precision="5" Scale="2" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__QuoteID__5535A963" FromRole="Quotations" ToRole="Orders" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Quotation__Suppl__4BAC3F29" FromRole="Quotations" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactInfo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Inventories" Relationship="Self.FK__Inventori__Suppl__52593CB8" FromRole="Supplier" ToRole="Inventories" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Supplier__571DF1D5" FromRole="Supplier" ToRole="Orders" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Supplie__4E88ABD4" FromRole="Supplier" ToRole="Product" />
+    <NavigationProperty Name="Quotations" Relationship="Self.FK__Quotation__Suppl__4BAC3F29" FromRole="Supplier" ToRole="Quotations" />
+  </EntityType>
+  <Association Name="FK__Inventori__Produ__5165187F">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Inventories" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Inventories">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventori__Suppl__52593CB8">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Inventories" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Inventories">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Inventor__5629CD9C">
+    <End Role="Inventories" Type="Self.Inventory" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventories">
+        <PropertyRef Name="InventoryID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="InventoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__QuoteID__5535A963">
+    <End Role="Quotations" Type="Self.Quotation" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quotations">
+        <PropertyRef Name="QuoteID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="QuoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Supplier__571DF1D5">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Supplie__4E88ABD4">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Quotation__Suppl__4BAC3F29">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Quotations" Type="Self.Quotation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Quotations">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FixTechCompanyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Inventories" EntityType="Self.Inventory" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Quotations" EntityType="Self.Quotation" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <AssociationSet Name="FK__Inventori__Produ__5165187F" Association="Self.FK__Inventori__Produ__5165187F">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Inventories" EntitySet="Inventories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventori__Suppl__52593CB8" Association="Self.FK__Inventori__Suppl__52593CB8">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Inventories" EntitySet="Inventories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Inventor__5629CD9C" Association="Self.FK__Orders__Inventor__5629CD9C">
+      <End Role="Inventories" EntitySet="Inventories" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__QuoteID__5535A963" Association="Self.FK__Orders__QuoteID__5535A963">
+      <End Role="Quotations" EntitySet="Quotations" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Supplier__571DF1D5" Association="Self.FK__Orders__Supplier__571DF1D5">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Supplie__4E88ABD4" Association="Self.FK__Product__Supplie__4E88ABD4">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Quotation__Suppl__4BAC3F29" Association="Self.FK__Quotation__Suppl__4BAC3F29">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Quotations" EntitySet="Quotations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
